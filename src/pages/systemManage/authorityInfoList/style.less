@@ -1,0 +1,52 @@
+@import '~antd/es/style/themes/default.less';
+
+.PageContainer {
+  :global {
+    .ant-pro-page-container-children-content {
+      margin: 0 0 0;
+    }
+    .ant-pro-table-search {
+      margin-bottom: 1px;
+      padding: 1px 0 0 0;
+      border-bottom: 1px;
+    }
+    .ant-pro-table .ant-card-body{
+      padding: 0;
+    }
+
+  }
+}
+
+.headerInfo {
+  position: relative;
+  text-align: center;
+  & > span {
+    display: inline-block;
+    margin-bottom: 4px;
+    color: @text-color-secondary;
+    font-size: @font-size-base;
+    line-height: 22px;
+  }
+  & > p {
+    margin: 0;
+    color: @heading-color;
+    font-size: 24px;
+    line-height: 32px;
+  }
+  & > em {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 56px;
+    background-color: @border-color-split;
+  }
+}
+.headerCard {
+  :global {
+    .ant-card-body {
+      padding-top: 0;
+    }
+  }
+
+}
