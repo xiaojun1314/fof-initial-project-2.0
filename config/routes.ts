@@ -102,6 +102,13 @@
         component: './systemManage/moduleElementList',
       },
       {
+        path: '/systemManage/moduleOperationList',
+        name: 'moduleOperationList',
+        icon: 'smile',
+        access: 'normalRouteFilter',
+        component: './systemManage/moduleOperationList',
+      },
+      {
         path: '/systemManage/authorityInfoList',
         name: 'authorityInfoList',
         icon: 'smile',

@@ -2,7 +2,7 @@ import React, { useState, useRef, Fragment, useEffect } from 'react';
 import { Button, message, Dropdown, Menu, Modal } from 'antd';
 import type { FormInstance } from 'antd/lib/form';
 import { PageContainer } from '@ant-design/pro-layout';
-import { PlusOutlined, EditOutlined, DeleteOutlined, DownOutlined, ExclamationCircleOutlined, MoreOutlined,UserOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined, DownOutlined, ExclamationCircleOutlined, MoreOutlined,UserOutlined,SlackOutlined } from '@ant-design/icons';
 import { ModalForm, ProFormText,DrawerForm } from '@ant-design/pro-form';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -12,7 +12,8 @@ import OrgTreeList from './modal/OrgTreeList';
 import RoleToUserListModal from './modal/RoleToUserListModal';
 import MenuAuthorityModal from './modal/MenuAuthorityModal';
 import ElementAuthorityModal from './modal/ElementAuthorityModal';
-import { queryRoleList, removeRoleInfo, saveRoleInfo, checkRoleCode, editRoleInfo, queryOrgTreeInfo,queryMenuTreeInfo,getMenuIdsByRoleId,getModuleElementInfoByRole } from './service';
+import OperationAuthorityModal from './modal/OperationAuthorityModal';
+import { queryRoleList, removeRoleInfo, saveRoleInfo, checkRoleCode, editRoleInfo, queryOrgTreeInfo,queryMenuTreeInfo,getMenuIdsByRoleId,getModuleElementInfoByRole,getModuleOperationInfoByRole } from './service';
 import type { RoleInfoItem } from './data.d';
 import styles from './style.less';
 
@@ -44,6 +45,7 @@ const RoleInfoList: React.FC = () => {
 
   const [elementAuthorityVisible, setElementAuthorityVisible] = useState(false);
 
+  const [operationAuthorityVisible, setOperationAuthorityVisible] = useState(false);
 
   const [addVisible, setAddVisible] = useState<boolean>(false);
 
@@ -55,13 +57,11 @@ const RoleInfoList: React.FC = () => {
 
   const [roleId, setRoleId] = useState({});
 
-  const [moduleInfo, setModuleInfo] = useState([]);
+  const [moduleInfo1, setModuleInfo1] = useState([]);
 
-
+  const [moduleInfo2, setModuleInfo2] = useState([]);
 
   const [checkAll, setCheckAll] = useState([]);
-
-
 
   const [allCheckListId, setAllCheckListId] = useState([]);
 
@@ -306,7 +306,7 @@ const RoleInfoList: React.FC = () => {
 
   const handleCancelElementAuthorityModal = () => {
     setElementAuthorityVisible(false);
-    setModuleInfo([]);
+    setModuleInfo1([]);
     setCheckAll([]);
     setIndeterminate([]);
     setAllCheckListId([]);
@@ -344,10 +344,57 @@ const RoleInfoList: React.FC = () => {
       }
       return true;
     });
-    setModuleInfo(data.moduleInfo);
+    setModuleInfo1(data.moduleInfo);
     setAllCheckListId(data.allCheckListId);
     setRoleId(selectedRowsState[0].id);
     setElementAuthorityVisible(true);
+  };
+
+
+  const handleCancelOperationAuthorityModal = () => {
+    setOperationAuthorityVisible(false);
+    setModuleInfo2([]);
+    setCheckAll([]);
+    setIndeterminate([]);
+    setAllCheckListId([]);
+    setRoleId([]);
+  };
+
+  const handleShowOperationAuthorityModal = async () => {
+    if (selectedRowsState.length !== 1) return;
+    const params = {role_id:selectedRowsState[0].id};
+    const { data }  = await getModuleOperationInfoByRole(params);
+    data.moduleInfo.map((item: { operationIdList: string | any[]; checkedList: string | any[]; }, index: string | number) => {
+      if(item.operationIdList.length===item.checkedList.length&&(item.operationIdList.length!==0)) {
+        setCheckAll(
+          () => {
+            checkAll[index] = true;
+            return [...checkAll]
+          }
+        )
+      }
+      if(item.operationIdList.length!==item.checkedList.length&&item.checkedList.length>0){
+        setIndeterminate(
+          ()=>{
+            indeterminate[index] = true;
+            return [...indeterminate]
+          }
+        )
+      }
+      if(item.operationIdList.length===item.checkedList.length&&item.checkedList.length>0){
+        setIndeterminate(
+          ()=>{
+            indeterminate[index] = false;
+            return [...indeterminate]
+          }
+        )
+      }
+      return true;
+    });
+    setModuleInfo2(data.moduleInfo);
+    setAllCheckListId(data.allCheckListId);
+    setRoleId(selectedRowsState[0].id);
+    setOperationAuthorityVisible(true);
   };
 
   return (
@@ -377,6 +424,7 @@ const RoleInfoList: React.FC = () => {
               selectedRows && selectedRows.length === 1 && (<Button key="edit" onClick={() => handleShowRoleToUserListModal()}><UserOutlined />分配用户</Button>),
               selectedRows && selectedRows.length === 1 && (<Button key="edit" onClick={() => handleShowMenuAuthorityModal()}><UserOutlined />菜单授权</Button>),
               selectedRows && selectedRows.length === 1 && (<Button key="edit" onClick={() => handleShowElementAuthorityModal()}><UserOutlined />元素授权</Button>),
+              selectedRows && selectedRows.length === 1 && (<Button key="operation" onClick={() => handleShowOperationAuthorityModal()}><SlackOutlined />操作授权</Button>),
             ]}
             params={{"selectKey": selectKey,"type":type}}
             request={async (params, sorter, filter) => {
@@ -425,7 +473,7 @@ const RoleInfoList: React.FC = () => {
       <ElementAuthorityModal
         handleCancelModal={handleCancelElementAuthorityModal}
         visible={elementAuthorityVisible}
-        moduleInfo={moduleInfo}
+        moduleInfo={moduleInfo1}
         checkAll={checkAll}
         allCheckListId={allCheckListId}
         setCheckAll={setCheckAll}
@@ -434,6 +482,17 @@ const RoleInfoList: React.FC = () => {
         setIndeterminate={setIndeterminate}
       />
 
+      <OperationAuthorityModal
+        handleCancelModal={handleCancelOperationAuthorityModal}
+        visible={operationAuthorityVisible}
+        moduleInfo={moduleInfo2}
+        checkAll={checkAll}
+        allCheckListId={allCheckListId}
+        setCheckAll={setCheckAll}
+        roleId={roleId}
+        indeterminate={indeterminate}
+        setIndeterminate={setIndeterminate}
+      />
     </PageContainer>
   );
 };

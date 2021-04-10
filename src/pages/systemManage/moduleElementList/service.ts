@@ -46,11 +46,4 @@ export async function editModuleElementInfo(params?: ModuleElementItem) {
   });
 }
 
-export async function queryMenuTreeInfo() {
-  return request('/ultima/menuManage/queryMenuTreeInfo', {
-    method: 'POST',
-    data: { method: 'save'},
-  });
-}
-
 

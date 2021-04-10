@@ -119,10 +119,23 @@ export async function getModuleElementInfoByRole(params: { role_id: any; }) {
   });
 }
 
-
-
 export async function saveRoleAndMoudleElementAndAuthInfo(params: { moduleElementIds: any; role_id: any; }) {
   return request('/ultima/roleManage/saveRoleAndMoudleElementAndAuthInfo', {
+    method: 'POST',
+    data: { ...params, method: 'save' },
+  });
+}
+
+
+export async function getModuleOperationInfoByRole(params: { role_id: any; }) {
+  return request('/ultima/moduleOperationManage/getModuleOperationInfoByRole', {
+    method: 'POST',
+    data: { ...params, method: 'save' },
+  });
+}
+
+export async function saveRoleAndMoudleOperationAndAuthInfo(params: { moduleOperationIds: any; role_id: any; }) {
+  return request('/ultima/roleManage/saveRoleAndMoudleOperationAndAuthInfo', {
     method: 'POST',
     data: { ...params, method: 'save' },
   });

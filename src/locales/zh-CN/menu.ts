@@ -58,6 +58,7 @@ export default {
   "menu.systemManage.menuInfoList":'菜单管理',
   "menu.systemManage.moduleInfoList":'模块管理',
   "menu.systemManage.moduleElementList":'模块元素管理',
+  "menu.systemManage.moduleOperationList":'模块操作管理',
   "menu.systemManage.authorityInfoList":'权限管理',
   'menu.orgcenter':'组织中心',
   'menu.orgcenter.welcome': '欢迎页面',
