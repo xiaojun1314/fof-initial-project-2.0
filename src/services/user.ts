@@ -6,7 +6,7 @@ export async function query() {
 
 export async function queryCurrent() {
   // return request<API.CurrentUser>('/api/currentUser');
-  return request<{ data: API.CurrentUser }>('/ultima/initial/currentUser', {
+  return request<{ data: any }>('/ultima/initial/currentUser', {
     method: 'POST',
     requestType: 'form'
   });
