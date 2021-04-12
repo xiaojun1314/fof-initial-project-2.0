@@ -140,10 +140,9 @@ const OperationAuthorityModal: React.FC<OperationAuthorityProps> = (props) => {
               </Space>
             )
           }
-          {moduleInfo.length!==(index+1)&&(<Divider style={{margin:5}}/>)}
+          {moduleInfo.length!==(index)&&(<Divider style={{margin:5}}/>)}
         </div>
       )}
-
     </Modal>
   );
 };

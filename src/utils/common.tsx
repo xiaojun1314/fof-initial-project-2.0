@@ -7,7 +7,7 @@ import {DashboardOutlined,DesktopOutlined,ApartmentOutlined,ClusterOutlined, Acc
   CrownOutlined, CustomerServiceOutlined, DatabaseOutlined, DeleteColumnOutlined, DeleteRowOutlined,
   DeliveredProcedureOutlined, DeploymentUnitOutlined,DingtalkOutlined, DisconnectOutlined,
   DislikeOutlined, DollarCircleOutlined, DownloadOutlined, EllipsisOutlined, EnvironmentOutlined, EuroCircleOutlined,DropboxOutlined,
-  ExceptionOutlined, ExpandAltOutlined, ExpandOutlined, ExperimentOutlined, ExportOutlined, EyeOutlined, EyeInvisibleOutlined, FieldStringOutlined, FieldBinaryOutlined, FieldNumberOutlined} from '@ant-design/icons';
+  ExceptionOutlined, ExpandAltOutlined, ExpandOutlined, ExperimentOutlined, ExportOutlined, EyeOutlined, EyeInvisibleOutlined, FieldStringOutlined, FieldBinaryOutlined, FieldNumberOutlined,UserOutlined,TeamOutlined} from '@ant-design/icons';
 
 export  const IconMenuMap = {
   AccountBookOutlined,
@@ -81,7 +81,9 @@ export  const IconMenuMap = {
   FieldStringOutlined,
   FieldBinaryOutlined,
   FieldNumberOutlined,
-DropboxOutlined
+DropboxOutlined,
+UserOutlined,
+TeamOutlined
 }
 
 export const loopMenuRoutesItem = (routes: any) =>{

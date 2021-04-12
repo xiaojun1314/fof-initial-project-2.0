@@ -2,7 +2,7 @@ import React, { useState, useRef, Fragment, useEffect } from 'react';
 import { Button, message, Dropdown, Menu, Modal } from 'antd';
 import type { FormInstance } from 'antd/lib/form';
 import { PageContainer } from '@ant-design/pro-layout';
-import { PlusOutlined, EditOutlined, DeleteOutlined, DownOutlined, ExclamationCircleOutlined, MoreOutlined,UserOutlined,SlackOutlined } from '@ant-design/icons';
+import { PlusOutlined, EditOutlined, DeleteOutlined, DownOutlined, ExclamationCircleOutlined, MoreOutlined,UserOutlined,SlackOutlined,MenuOutlined,ProfileOutlined } from '@ant-design/icons';
 import { ModalForm, ProFormText,DrawerForm } from '@ant-design/pro-form';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -422,8 +422,8 @@ const RoleInfoList: React.FC = () => {
                 </span>
               ),
               selectedRows && selectedRows.length === 1 && (<Button key="edit" onClick={() => handleShowRoleToUserListModal()}><UserOutlined />分配用户</Button>),
-              selectedRows && selectedRows.length === 1 && (<Button key="edit" onClick={() => handleShowMenuAuthorityModal()}><UserOutlined />菜单授权</Button>),
-              selectedRows && selectedRows.length === 1 && (<Button key="edit" onClick={() => handleShowElementAuthorityModal()}><UserOutlined />元素授权</Button>),
+              selectedRows && selectedRows.length === 1 && (<Button key="edit" onClick={() => handleShowMenuAuthorityModal()}><MenuOutlined />菜单授权</Button>),
+              selectedRows && selectedRows.length === 1 && (<Button key="edit" onClick={() => handleShowElementAuthorityModal()}><ProfileOutlined />元素授权</Button>),
               selectedRows && selectedRows.length === 1 && (<Button key="operation" onClick={() => handleShowOperationAuthorityModal()}><SlackOutlined />操作授权</Button>),
             ]}
             params={{"selectKey": selectKey,"type":type}}
